@@ -5,7 +5,8 @@ module.exports = (app) => {
 
   const usersController = require('./../Controller/UsersController');
 
-  app.route('/').get(usersController.users)
-  app.route('/add').post(usersController.add)
-  // app.route('/users/id').delete(usersController.delete)
+  app.route('/').get(indexController.index)
+  app.route('/users').get(usersController.users)
+  app.route('/users/add').post(usersController.add)
+  app.route('/users/id').delete(usersController.delete)
 }
