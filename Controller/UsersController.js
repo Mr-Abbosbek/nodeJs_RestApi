@@ -14,26 +14,40 @@ exports.users = (req, res) => {
 }
 
 exports.add = (req, res) => {
+  var body = req.body;
+  const sql = "INSERT INTO `users` (`id`, `name`, `second_name`, `email`, `date`) VALUES (?, ?, ?, ?, ?)";
+  db.query(sql, [body.id, body.name, body.second_name, body.email, body.date], (error, results)=>{
+    if (error) {
+      console.log(error);
+    } else {
+      response.status(results, res);
+    }
+  })
+  console.log(req);
+}
 
-  const sql = "INSERT INTO `users` (`name`, `second_name`, `email`) VALUES ('" + req.query.name + "', '" + req.query.second_name + "', '" + req.query.email + "')";
+exports.update = (req, res) => {
+  var body = req.body;
+  var id = req.params.id;
+  const sql = "UPDATE `users` SET `id`='"+body.id+"', `name`='"+body.name+"', `second_name`='"+body.second_name+"', `email`='"+body.email+"', `date`='"+body.date+"' WHERE id="+id;
   db.query(sql, (error, results)=>{
     if (error) {
       console.log(error);
     } else {
-      response.status(results, res)
+      response.status(results, res);
     }
   })
   console.log(req);
 }
 
 exports.delete = (req, res) => {
-
-  const sql = "DELETE FROM `users` WHERE `id`='" + req.query.id + "' ";
+  var id = req.params.id;
+  const sql = "DELETE FROM `users` WHERE id="+id;
   db.query(sql, (error, results)=>{
     if (error) {
       console.log(error);
     } else {
-      response.status(results, res)
+      response.status(results, res);
     }
   })
   console.log(req);

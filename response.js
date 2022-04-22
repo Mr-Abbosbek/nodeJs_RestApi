@@ -6,6 +6,6 @@ exports.status = (values, res) => {
     "values": values
   }
 
-  res.json(data)
+  res.json(data.values)
   res.end()
 }
